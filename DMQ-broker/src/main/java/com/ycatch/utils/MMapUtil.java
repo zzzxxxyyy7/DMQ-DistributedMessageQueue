@@ -10,10 +10,6 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 提供基于 Java 的 MMap Api 访问文件的能力
@@ -28,7 +24,6 @@ public class MMapUtil {
 
     private File file;
     private MappedByteBuffer mappedByteBuffer;
-    private int mappedSize;
     private FileChannel fileChannel;
 
     /**
@@ -85,7 +80,7 @@ public class MMapUtil {
      * @param force
      */
     public void writeContent(byte[] content, boolean force) {
-        // 默认刷到 page cache 中，
+        // 默认刷到 page cache 中
         // 如果需要强制刷盘，需要兼容
         mappedByteBuffer.put(content);
         if (force) {
